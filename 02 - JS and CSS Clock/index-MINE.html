@@ -68,7 +68,10 @@
     }
   </style>
 
-  <script>
+  <script> 
+    /**
+     * Define variables.
+     */
     const secondHand = document.querySelector('.second-hand');
     const minuteHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
@@ -78,6 +81,10 @@
     const startMinutesDegrees = getDegrees(start.getMinutes(), 'minutes') + 90;
     const startHoursDegrees = getDegrees(start.getHours(), 'hours') + 90;
 
+
+    /**
+     * Takes a number and unit of time (seconds, minutes, hours) and determines the clock position in degrees for that unit.
+     */
     function getDegrees(number, unit) {
       let degrees = 0;
 
@@ -87,14 +94,20 @@
         degrees = ((number / 60) * 360);
       }
       return degrees;
-    };
+    };  
 
+    /**
+     * Sets the clock to the correct hand positions on page load.
+     */
     function setStart() {
       secondHand.style.transform = `rotate(${startSecondsDegrees}deg)`;
       minuteHand.style.transform = `rotate(${startMinutesDegrees}deg`;
       hourHand.style.transform = `rotate(${startHoursDegrees}deg`;
     };
 
+    /**
+     * Determines the amount of time that has passed and moves clock hands accordingly.
+     */
     function animateClock() {
       const now = Date.now();
       const elapsedSeconds = Math.round((now - start) / 1000);
@@ -111,6 +124,9 @@
       hourHand.style.transform = `rotate(${newHourDegrees}deg`;
     };
 
+    /**
+     * Initiate the clock.
+     */
     setStart();
     setInterval(animateClock, 1000);
 
